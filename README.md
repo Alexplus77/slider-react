@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# Слайдер
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Домашнее задание к занятию 1.2 «Способы поиска нужного HTML-элемента».
 
-## Available Scripts
+## Описание 
 
-In the project directory, you can run:
+Необходимо реализовать слайдер изображений с бесконечной сменой слайдов.
 
-### `npm start`
+![Demo](src/demo.gif)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Исходные данные
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Основная HTML-разметка
+2. Базовые CSS-стили
 
-### `npm test`
+Все слайды представлены следующей структурой:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```html
+<div class="slider__item">
+  <img class="slider__image" src="https://i.postimg.cc/rwj7v9BC/8ea2eb98-6cce-4f9f-96f0-60652623cf8e-large16x9-MGNgraphic-UFO-7.jpg" alt="">
+</div>
+```
 
-### `npm run build`
+Для того, чтобы конкретный слайд был активен, у него должен быть класс
+*slider__item_active*:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```html
+<div class="slider__item slider__item_active">
+    <!-- ... -->
+</div>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Навигация с помощью боковых кнопок представлена разметкой:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```html
+<div class="slider__arrows">
+  <div class="slider__arrow slider__arrow_prev">&lt;</div>
+  <div class="slider__arrow slider__arrow_next">&gt;</div>
+</div>
+```
 
-### `npm run eject`
+### Процесс реализации
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Установите обработчики события *click* на элементах «Влево» и «Вправо»
+2. При смене слайдов учитывайте, что навигация должна быть бесконечной. То есть, 
+смена крайнего левого слайда должна перекидывать к крайнему правому и наоборот.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+_В решении старайтесь делать разделение кода. 
+Регистрация обработчиков отдельно, управление слайдером отдельно._
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Повышенный уровень сложности (не обязательно)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Добавьте к слайдеру управление с помощью точек: 
 
-## Learn More
+![Extended Demo](src/extended-demo.gif)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Вся HTML/CSS разметка уже присутствует в файлах (её необходимо расскомментировать):
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```html
+<div class="slider__dots">
+  <div class="slider__dot"></div>
+  <div class="slider__dot"></div>
+  <div class="slider__dot"></div>
+  <div class="slider__dot"></div>
+  <div class="slider__dot"></div>
+</div>
+```
 
-### Code Splitting
+При нажатии на каждый из элементов с классом *slider_dot* необходимо
+переходить на соответствующий слайд.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Для того, чтобы сделать точку активной, необходимо задать ей класс
+*slider__dot_active*:
 
-### Analyzing the Bundle Size
+```html
+<div class="slider__dot slider__dot_active"></div>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Навигация с помощью боковых элементов должна также приводить к смене активных точек
 
-### Making a Progressive Web App
+## Подсказки (спойлеры)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<details>
+<summary>Используемые темы</summary>
 
-### Advanced Configuration
+1. Событие *click*, метод *onclick*, обработчик события
+2. Метод Array.from() или оператор распространения (spread, «...») для удобной
+   навигации по найденным элементам
+3. Свойство *length* массива
+   
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+<details>
+<summary>Советы</summary>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Опирайтесь на свойство *length* для подсчёта количества слайдов или точек
+2. При движении вправо и влево, следите, чтобы номер слайда существовал
+3. Храните номер текцщего слайда в отдельной переменной. 
+Меняйте значение в переменной по смене слайда. По этому значению легко будет
+найти нужный слайд или активную точку. Задайте начальным значением *0*.
+4. Для проверки на наличие того или иного класса, используйте метод
+[includes](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/includes):
 
-### `npm run build` fails to minify
+```javascript
+dot.className.includes( 'slider__dot_active' );
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Более удобный вариант - использовать объект 
+[*classList*](https://developer.mozilla.org/ru/docs/Web/API/Element/classList), 
+с которым вы познакомитесь позднее. Он содержит удобный метод *contains*:
+
+```javascript
+dot.classList.contains( 'slider__dot_active' );
+```
+
+   
+</details>
+
+
+## Решение задач
+1. Перейти в папку задания. `cd ./element-search/slider`.
+2. Открыть файл `task.js` в вашем редакторе кода и выполнить задание.
+3. Открыть файл `task.html` в вашем браузере и убедиться в правильности выводимых результатов.
+4. Добавить файл `task.js` в индекс git с помощью команды `git add %file-path%`, где %file-path% - путь до целевого файла. `git add task.js`.
+5. Сделать коммит используя команду `git commit -m '%comment%'`, где %comment% - это произвольный комментарий к вашему коммиту. `git commit -m 'first commit slider'`.
+6. Опубликовать код в репозиторий homeworks с помощью команды `git push -u origin master`.
+7. Прислать ссылку на репозиторий через личный кабинет на сайте [Нетологии][6].
+
+[0]: https://github.com/
+[1]: https://www.sublimetext.com/
+[2]: https://code.visualstudio.com/
+[3]: https://github.com/netology-code/guides/tree/master/github
+[4]: https://git-scm.com/
+[5]: https://github.com/netology-code/guides/blob/master/git/REAMDE.md
+[6]: https://netology.ru/
+
+*Никаких файлов прикреплять не нужно.*
+
+Все задачи обязательны к выполнению для получения зачета. Присылать на проверку можно каждую задачу по отдельности или все задачи вместе. Во время проверки по частям ваша домашняя работа будет со статусом "На доработке".
+
+Любые вопросы по решению задач задавайте в Slack-канале.
