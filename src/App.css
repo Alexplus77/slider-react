@@ -1,10 +1,14 @@
 body {
+  display: grid;
+  justify-items: center;
   margin: 0;
 }
 .slider {
   position: relative;
   margin-top: 20px;
+  width: 800px;
   height: 500px;
+  justify-items: center;
 }
 .slider__items {
   height: 100%;
