@@ -1,0 +1,1 @@
+export { SliderNavigationDots } from "./SliderNavigationDots";

@@ -15,8 +15,13 @@ const ContextSlider = (props) => {
     setCount(count - 1);
     count === 0 && setCount(db.length - 1);
   };
+  const handleClickDot = (index) => {
+    setCount(index);
+  };
   return (
-    <SliderContext.Provider value={{ count, handleNextImg, handlePrevImg, db }}>
+    <SliderContext.Provider
+      value={{ count, handleNextImg, handlePrevImg, handleClickDot, db }}
+    >
       {props.children}
     </SliderContext.Provider>
   );

@@ -4,11 +4,9 @@ import { ContextSlider } from "SliderContext";
 import App from "App";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ContextSlider>
-      <App />
-    </ContextSlider>
-  </React.StrictMode>,
+  <ContextSlider>
+    <App />
+  </ContextSlider>,
   document.getElementById("root")
 );
 
