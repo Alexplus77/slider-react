@@ -4,7 +4,7 @@ import { SliderContext } from "SliderContext";
 const SliderNavigationDots = () => {
   const { db, handleClickDot, count } = useContext(SliderContext);
   return (
-    <div class="slider__dots">
+    <div className="slider__dots">
       {db.map(({ img }, index) => (
         <div
           onClick={() => handleClickDot(index)}
