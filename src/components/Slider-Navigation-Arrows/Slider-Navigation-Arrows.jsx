@@ -1,18 +1,21 @@
-import React, { useContext } from "react";
-import { SliderContext } from "SliderContext";
+import React from "react";
+
+import { useDispatch } from "react-redux";
+import { decrement, increment } from "actions/createAction";
+
 const SliderNavigationArrows = () => {
-  const { handlePrevImg, handleNextImg } = useContext(SliderContext);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="slider__arrows">
         <div
-          onClick={handlePrevImg}
+          onClick={() => dispatch(decrement())}
           className="slider__arrow slider__arrow_prev"
         >
           &lt;
         </div>
         <div
-          onClick={handleNextImg}
+          onClick={() => dispatch(increment())}
           className="slider__arrow slider__arrow_next"
         >
           &gt;

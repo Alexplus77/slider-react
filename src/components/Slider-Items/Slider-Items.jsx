@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { SliderItem } from "components/Slider-Item";
-import { SliderContext } from "SliderContext";
+import { useSelector } from "react-redux";
+import { db } from "db/db";
 
 const SliderItems = () => {
-  const { db, count } = useContext(SliderContext);
+  const count = useSelector((state) => state.changeCount);
+
   return (
     <div className="slider__items">
       {db.map(
