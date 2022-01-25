@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { SliderItem } from "components/Slider-Item";
 import { useSelector } from "react-redux";
-import { db } from "db/db";
 
 const SliderItems = () => {
-  const count = useSelector((state) => state.changeCount);
+  const { currentIndex, slides } = useSelector((state) => state.changeCount);
 
+  console.log(currentIndex);
   return (
     <div className="slider__items">
-      {db.map(
+      {slides.map(
         ({ img }, index) =>
-          index === count && <SliderItem key={img} img={img} />
+          index === currentIndex && <SliderItem key={img} img={img} />
       )}
     </div>
   );

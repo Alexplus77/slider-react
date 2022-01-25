@@ -5,18 +5,24 @@ import {
   DECREMENT_COUNT,
 } from "actions/actionType";
 
-export const changeCount = (state = 0, action) => {
+const initialState = {
+  slides: db,
+  currentIndex: 0,
+  error: null,
+};
+
+export const changeCount = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_COUNT:
-      state++;
-      state === db.length && (state = 0);
+      state.currentIndex++;
+      state.currentIndex === state.slides.length && (state.currentIndex = 0);
       return state;
     case DECREMENT_COUNT:
-      state--;
-      state === -1 && (state = db.length - 1);
+      state.currentIndex--;
+      state.currentIndex === -1 && (state.currentIndex = db.length - 1);
       return state;
     case DOTS_CLICK:
-      state = action.payload;
+      state.currentIndex = action.payload;
       return state;
     default:
       return state;
