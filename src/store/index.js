@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from "redux";
-import { changeCount } from "reducers/reducersSlider";
+import { sliderReducer } from "reducers/reducersSlider";
 import { devToolsEnhancer } from "redux-devtools-extension";
 const reducers = combineReducers({
-  changeCount: changeCount,
+  sliderReducer: sliderReducer,
 });
 
 const store = createStore(reducers, devToolsEnhancer());

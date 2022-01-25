@@ -3,14 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { dotClick } from "actions/createAction";
 
 const SliderNavigationDots = () => {
-  const { currentIndex, slides } = useSelector((state) => state.changeCount);
+  const { currentIndex, slides } = useSelector((state) => state.sliderReducer);
 
   const dispatch = useDispatch();
+  const handleDotsClick = (index) => {
+    dispatch(dotClick(index));
+  };
   return (
     <div className="slider__dots">
       {slides?.map(({ img }, index) => (
         <div
-          onClick={() => dispatch(dotClick(index))}
+          onClick={() => handleDotsClick(index)}
           key={img}
           className={
             currentIndex === index

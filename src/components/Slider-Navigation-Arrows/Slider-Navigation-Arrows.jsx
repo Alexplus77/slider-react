@@ -5,17 +5,23 @@ import { decrement, increment } from "actions/createAction";
 
 const SliderNavigationArrows = () => {
   const dispatch = useDispatch();
+  const handleIncrement = () => {
+    dispatch(increment());
+  };
+  const handleDecrement = () => {
+    dispatch(decrement());
+  };
   return (
     <>
       <div className="slider__arrows">
         <div
-          onClick={() => dispatch(decrement())}
+          onClick={handleDecrement}
           className="slider__arrow slider__arrow_prev"
         >
           &lt;
         </div>
         <div
-          onClick={() => dispatch(increment())}
+          onClick={handleIncrement}
           className="slider__arrow slider__arrow_next"
         >
           &gt;

@@ -3,9 +3,7 @@ import { SliderItem } from "components/Slider-Item";
 import { useSelector } from "react-redux";
 
 const SliderItems = () => {
-  const { currentIndex, slides } = useSelector((state) => state.changeCount);
-
-  console.log(currentIndex);
+  const { currentIndex, slides } = useSelector((state) => state.sliderReducer);
   return (
     <div className="slider__items">
       {slides.map(

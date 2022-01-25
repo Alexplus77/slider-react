@@ -1,29 +1,29 @@
-import { db } from "db/db";
 import {
-  INCREMENT_COUNT,
-  DOTS_CLICK,
-  DECREMENT_COUNT,
+  HANDLE_INCREMENT_COUNT,
+  HANDLE_DECREMENT_COUNT,
+  HANDLE_DOTS_CLICK,
+  SLIDES_LOAD_FROM_SERVER,
 } from "actions/actionType";
 
 const initialState = {
-  slides: db,
+  slides: [],
   currentIndex: 0,
   error: null,
 };
 
-export const changeCount = (state = initialState, action) => {
+export const sliderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT_COUNT:
-      state.currentIndex++;
-      state.currentIndex === state.slides.length && (state.currentIndex = 0);
-      return state;
-    case DECREMENT_COUNT:
-      state.currentIndex--;
-      state.currentIndex === -1 && (state.currentIndex = db.length - 1);
-      return state;
-    case DOTS_CLICK:
-      state.currentIndex = action.payload;
-      return state;
+    case SLIDES_LOAD_FROM_SERVER:
+      return { ...state, slides: action.payload };
+    case HANDLE_INCREMENT_COUNT:
+      state.currentIndex === state.slides.length - 1 &&
+        (state.currentIndex = -1);
+      return { ...state, currentIndex: state.currentIndex + 1 };
+    case HANDLE_DECREMENT_COUNT:
+      state.currentIndex === 0 && (state.currentIndex = state.slides.length);
+      return { ...state, currentIndex: state.currentIndex - 1 };
+    case HANDLE_DOTS_CLICK:
+      return { ...state, currentIndex: action.payload };
     default:
       return state;
   }
